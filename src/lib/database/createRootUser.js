@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs'
 
 export default async (db)=>{
     const id = Date.now() + Math.round(Math.random() * 1E9).toString()
-    const hashPassword = bcrypt.hashSync("password", 10)
+    const hashPassword = bcrypt.hashSync("********", 10)
 
     let user = {
         id: id, 

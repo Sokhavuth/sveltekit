@@ -3,13 +3,11 @@
 <script>
     import { items } from '$lib/store.js'
     export let data
-
-    $: $items = data
 </script>
 
 <header class='Header'>
     <div class='region wrapper'>
-        <div class='logo'>{ $items?.logo }</div>
+        <div class='page-title'>{ $items.pageTitle }</div>
         <div class='search'>
             <select>
                 <option>​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ការផ្សាយ</option>
@@ -18,7 +16,7 @@
             <input type='submit' value='បញ្ជូន' />
         </div>
         <div class='logout'>
-            <span>{ $items?.userName }</span> |
+            <span>{ data.userName }</span> |
             <a href='/'>ទំព័រ​មុខ</a> |
             <a href='/admin/logout'>ចេញ​ក្រៅ</a>
         </div>
@@ -83,6 +81,10 @@
 
     .logout a{
         color: var(--color);
+    }
+
+    .page-title{
+        font: 20px/1.5 StardosStencil, Limonf3;
     }
 
     main {

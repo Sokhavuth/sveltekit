@@ -1,14 +1,11 @@
-// src/routes/admin/post/+page.server.js
+// src/routes/admin/+layout.server.
 
 import { SECRET_KEY } from '$env/static/private'
 import jwt from 'jsonwebtoken'
 import { redirect } from '@sveltejs/kit'
 
-export function load({ cookies, locals }) {
+export function load({ cookies }){
     const token = cookies.get('token')
-    const settings = locals.settings
-    settings.pageTitle = 'ទំព័រ​ការផ្សាយ'
-    const db = locals.db
 
     try {
         var user = jwt.verify(token, SECRET_KEY)
@@ -17,5 +14,5 @@ export function load({ cookies, locals }) {
         throw redirect(307, '/login')
     }
 
-    return { settings }
+    return { userName: user.userName }
 }

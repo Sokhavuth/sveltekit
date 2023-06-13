@@ -38,7 +38,7 @@ export const actions = {
         }
 
         if(bcrypt.compareSync(password, user.password)) {
-            const payload = { userId: user.id, userName: user.title }
+            const payload = { userId: user.id, userName: user.title, userRole: user.role }
             const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '12h' })
             cookies.set('token', token, { path: '/' })
             throw redirect(303, '/admin/post')
