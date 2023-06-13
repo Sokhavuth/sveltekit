@@ -6,6 +6,8 @@
     export let data
     
     $items.pageTitle = data.settings.pageTitle
+    $items.count = data.count
+
     let ClassicEditor
 
     onMount(async ()=> {
@@ -14,7 +16,7 @@
         ClassicEditor.create( document.querySelector('#editor'), {
           toolbar: ['fontfamily', 'fontsize', 'fontcolor', 'bold', 'italic', 
           'bulletedList', 'indent', 'outdent', 'numberedList', 'link', 'blockQuote', 
-          'code', 'table', 'codeblock', 'imageinsert', 'mediaembed', 'undo', 'redo' ],
+          'code', 'imageinsert', 'insertTable', 'codeblock', 'mediaembed', 'undo', 'redo' ],
           fontFamily: {
             options: [
               'ឧត្តមាន​ជ័យ, OdorMeanChey', 'អក្សរដៃ, HandWriting',
@@ -76,7 +78,7 @@
 
     const insertVideo = () => {
         let form = document.forms[0]
-        var selectElement = form.querySelector('input[name="video"]')
+        var selectElement = form.querySelector('input[name="videos"]')
         let json = selectElement.value
     
         if((json !== '')&&(json !== '[]')){
@@ -105,7 +107,7 @@
     
         for(let v in video){
             if(video[v] === ''){
-                alert(`ចូរ​បំពេញ​ទំរង់​បែបបទ​នៅ​ត្រង់​កន្លែង "${v}"`)
+                alert(`ចូរ​បំពេញ​ទំរង់​បែបបទ​នៅ​ត្រង់​កន្លែង "អត្តសញ្ញាណ​វីដេអូ"`)
                 success = false
                 break
             }else{
@@ -114,7 +116,7 @@
         }
 
         if(success){
-            selectElement = form.querySelector('input[name="video"]')
+            selectElement = form.querySelector('input[name="videos"]')
             let json = selectElement.value
 
             if((json === '')){
@@ -134,7 +136,7 @@
 
     function submitform(){
         let form = document.forms[0]
-        let  selectElement = form.querySelector('input[name="video"]')
+        let selectElement = form.querySelector('input[name="videos"]')
         let is_video = selectElement.value
 
         if((is_video !== '') && (is_video !== '[]')){
@@ -159,7 +161,7 @@
 
     function delVideo(index){
         let form = document.forms[0]
-        let  selectElement = form.querySelector('input[name="video"]')
+        let  selectElement = form.querySelector('input[name="videos"]')
         let json = selectElement.value
         videos = JSON.parse(json)
         videos.splice(index, 1)
@@ -175,6 +177,7 @@
     <div class='wrapper'>
         <select name='category' bind:value={selected} on:change={addCategory} >
             <option disabled selected>ជ្រើសរើស​ជំពូក</option>
+            <option>មេរៀន</option>
             <option>ព័ត៌មាន</option>
             <option>ភាពយន្ត</option>
         </select>
@@ -182,7 +185,7 @@
         <input type='datetime-local' step='1' value='' name='datetime' required />
         <input type='submit' value='ចុះ​ផ្សាយ' />
     </div>
-    <input name='video' value='' type='hidden' />
+    <input name='videos' value='' type='hidden' />
 </form>
 
 <div class='form'>

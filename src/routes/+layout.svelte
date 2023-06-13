@@ -6,7 +6,7 @@
 
 <slot />
 
-<footer>Powered by Sveltekit &copy;2023 Khmer Web</footer>
+<footer>Powered by SvelteKit &copy;2023 Khmer Web</footer>
 
 <style>
     footer {
