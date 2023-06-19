@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Khmerweb Sveltekit</title>
+	<title>Khmerweb SvelteKit</title>
     <link href="/fonts/setup.css" rel="stylesheet" />
     <link href="/styles/base.css" rel="stylesheet">
 </svelte:head>
@@ -11,6 +11,6 @@
 <style>
     footer {
         text-align: center;
-        padding: 0 0 10px;
+        padding: 10px 0;
     }
 </style>

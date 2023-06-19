@@ -1,16 +1,18 @@
 <!--src/routes/admin/post/+page.svelte-->
 
 <script>
-    import { onMount } from 'svelte'
+    import { onMount, afterUpdate } from 'svelte'
     import { items } from '$lib/store.js'
     export let data
     
-    $items.pageTitle = data.settings.pageTitle
-    $items.count = data.count
-    $items.items = data.items
-    $items.type = data.settings.type    
+    $: $items.pageTitle = data.settings.pageTitle
+    $: $items.count = data.count
+    $: $items.items = data.items
+    $: $items.item = data.item
+    $: $items.type = data.settings.type
 
     let ClassicEditor
+    let ckeditor
 
     onMount(async ()=> {
         const module = await import('ckeditor5-custom-build/build/ckeditor')
@@ -51,11 +53,18 @@
           },
         })
         .then( editor => {
-            console.log(editor)
+            ckeditor = editor
         } )
         .catch( error => {
             console.error( error )
         } )
+    })
+
+    afterUpdate(()=>{
+        parseVideos()
+        if(ckeditor){
+            ckeditor.setData($items.item.content)
+        }
     })
 
     let selected
@@ -170,12 +179,23 @@
         videos = videos
         selectElement.value = JSON.stringify(videos)
     }
+
+    function parseVideos(){
+        let form = document.forms[0]
+        let  selectElement = form.querySelector('input[name="videos"]')
+        let json = selectElement.value
+        if(json === ""){
+            videos = json
+        }else{
+            videos = JSON.parse(json)
+        }
+    }
 </script>
 
 <form method='post' on:submit|preventDefault={submitform}>
-    <input type='text' name='title' placeholder="ចំណងជើង" required />
-    <textarea name='content' id='editor'></textarea>
-    <input type='text' name='categories' class='categories' placeholder="បណ្តា​ជំពូក" required />
+    <input type='text' name='title' value="{$items.item.title}" placeholder="ចំណងជើង" required />
+    <textarea name='content' value="{$items.item.content}" id='editor'></textarea>
+    <input type='text' name='categories' value="{$items.item.categories.join(", ")}" class='categories' placeholder="បណ្តា​ជំពូក" required />
     <div class='wrapper'>
         <select name='category' bind:value={selected} on:change={addCategory} >
             <option disabled selected>ជ្រើសរើស​ជំពូក</option>
@@ -183,11 +203,11 @@
             <option>ព័ត៌មាន</option>
             <option>ភាពយន្ត</option>
         </select>
-        <input type='text' name='thumb' required placeholder="តំណរ​ភ្ជាប់​រូប​តំណាង" />
-        <input type='datetime-local' step='1' value='' name='datetime' required />
+        <input type='text' name='thumb' value="{$items.item.thumb}" required placeholder="តំណរ​ភ្ជាប់​រូប​តំណាង" />
+        <input type='datetime-local' step='1' value="{$items.item.datetime}" name='datetime' required />
         <input type='submit' value='ចុះ​ផ្សាយ' />
     </div>
-    <input name='videos' value='' type='hidden' />
+    <input name='videos' value="{$items.item.videos}" type='hidden' />
 </form>
 
 <div class='form'>

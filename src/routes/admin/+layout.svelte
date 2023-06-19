@@ -48,7 +48,31 @@
 <div class='info region'>សរុប​ទាំងអស់​មាន​ចំនួនៈ { $items?.count }</div>
 
 <footer class='region'>
-    <ul></ul>
+    <ul>
+        {#each $items?.items as item (item.id)}
+            <li>
+                <a class="thumb" href="/{$items.type}/{item.id}">
+                    <img src='{item.thumb}' />
+                    {#if (item.videos !== "" && item.videos !== "[]")}
+                    <img class="play-icon" src='/images/play.png' />
+                    {/if}
+                </a>
+                <span>
+                    <a href="/{$items.type}/{item.id}">{item.title}</a>
+                    <div>{new Date(item.datetime).toLocaleDateString("it-IT")}</div>
+                </span>
+                <div>
+                    <a href='/admin/{$items.type}/edit/{item.id}'>
+                        <img src="/images/edit.png" />
+                    </a>
+                    <a href='/admin/{$items.type}/delete/{item.id}'>
+                        <img src="/images/delete.png" />
+                    </a>
+                </div>
+                
+            </li>
+        {/each}
+    </ul>
     <div class='load-more'>
         <a href='/admin/paging'><img src='/images/load-more.png' /></a>
     </div>
@@ -122,10 +146,70 @@
         padding: 5px 0;
     }
 
+    footer ul{
+        list-style-type: none;
+        display: grid;
+        grid-template-columns: calc(50% - 5px) calc(50% - 5px);
+        grid-gap: 10px;
+        padding: 10px 0;
+    }
+
+    footer ul li{
+        background: var(--background);
+        display: grid;
+        grid-template-columns: 22% auto 15%;
+        grid-gap: 10px;
+        align-items: center;
+    }
+
+    footer ul li .thumb{
+        position: relative;
+        padding-top: 56.25%;
+        width: 100%;
+    }
+
+    footer ul li .thumb img{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    footer ul li .thumb .play-icon{
+        position: absolute;
+        width: 25%;
+        height: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    footer ul li span{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    footer ul li span a{
+        font: 15px/1.5 Oswald, Bayon;
+        color: white;
+    }
+
+    footer ul li div img{
+        width: 35px;
+        visibility: hidden;
+    }
+
+    footer ul li:hover div img{
+        visibility: visible;
+    }
+
+
+
     .load-more {
         text-align: center;
         background-color: var(--background);
-        margin: 10px 0;
         padding: 10px 0 5px;
     }
 </style>
