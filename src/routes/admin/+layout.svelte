@@ -61,7 +61,7 @@
                     <a href="/{$items.type}/{item.id}">{item.title}</a>
                     <div>{new Date(item.datetime).toLocaleDateString("it-IT")}</div>
                 </span>
-                <div>
+                <div class="edit">
                     <a href='/admin/{$items.type}/edit/{item.id}'>
                         <img src="/images/edit.png" />
                     </a>
@@ -196,12 +196,12 @@
         color: white;
     }
 
-    footer ul li div a img{
+    footer ul li .edit a img{
         width: 35px;
         visibility: hidden;
     }
 
-    footer ul li:hover div a img{
+    footer ul li:hover .edit a img{
         visibility: visible;
     }
 
