@@ -7,7 +7,7 @@ function getSetting(){
     settings.pageTitle = ''
     settings.description = ''
     settings.dLogo = ''
-    settings.dItemLimit = 10
+    settings.dItemLimit = 2
     settings.indexPostLimit = 20
     settings.categoryPostLimit = 20
 

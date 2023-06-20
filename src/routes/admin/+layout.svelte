@@ -2,7 +2,29 @@
 
 <script>
     import { items } from '$lib/store.js'
+    import { afterUpdate } from 'svelte'
     export let data
+    let page = 0
+
+    afterUpdate(()=>{
+        const element = document.querySelector(".load-more img")
+        element.setAttribute("src", "/images/load-more.png")
+    })
+
+    async function loadMoreData(type){
+        const element = document.querySelector(".load-more img")
+        element.setAttribute("src", "/images/loading.gif")
+        const response = await fetch(`/admin/${type}/paginate`, {
+            method: 'POST',
+			body: JSON.stringify({
+                page: ++page
+			})
+        })
+
+        const result = await response.json()
+        const moreItems = result.posts
+        $items.items = [...$items.items, ...moreItems]
+    }
 </script>
 
 <header class='Header'>
@@ -74,7 +96,7 @@
         {/each}
     </ul>
     <div class='load-more'>
-        <a href='/admin/paging'><img src='/images/load-more.png' /></a>
+        <img on:click={()=>loadMoreData($items.type)} src='/images/load-more.png' />
     </div>
 </footer>
 
@@ -211,5 +233,10 @@
         text-align: center;
         background-color: var(--background);
         padding: 10px 0 5px;
+    }
+
+    .load-more img:hover{
+        cursor: pointer;
+        opacity: .7;
     }
 </style>
