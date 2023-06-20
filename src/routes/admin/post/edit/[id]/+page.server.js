@@ -67,7 +67,10 @@ export const actions = {
         }}
 
         if(user.userRole !== "Guest"){
-            await db.collection("posts").updateOne(myquery,newvalue)
+            const post = await db.collection('posts').findOne({ id: params.id }, { projection: { _id: 0 } })
+            if((user.userId === post.author)||(user.userRole === "Admin")){
+                await db.collection("posts").updateOne(myquery,newvalue)
+            }
         }
 
     }

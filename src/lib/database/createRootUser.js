@@ -8,10 +8,10 @@ export default async (db)=>{
 
     let user = {
         id: id, 
-        title: "Guest",
+        title: "Vibol",
         password: hashPassword,
-        email: "guest@khmerweb.app",
-        role: "Guest",
+        email: "vibol@khmerweb.app",
+        role: "Author",
         thumb: "",
         info: "",
         video: "",
