@@ -196,12 +196,12 @@
         color: white;
     }
 
-    footer ul li div img{
+    footer ul li div a img{
         width: 35px;
         visibility: hidden;
     }
 
-    footer ul li:hover div img{
+    footer ul li:hover div a img{
         visibility: visible;
     }
 
