@@ -8,7 +8,8 @@
     $items.pageTitle = data.settings.pageTitle
     $items.count = data.count
     $items.items = data.items
-    $items.type = data.settings.type    
+    $items.type = data.settings.type
+    $items.pageNumber = data.settings.pageNumber    
 
     let ClassicEditor
 

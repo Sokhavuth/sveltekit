@@ -10,6 +10,7 @@
     $: $items.items = data.items
     $: $items.item = data.item
     $: $items.type = data.settings.type
+    $: $items.pageNumber = data.settings.pageNumber
 
     let ClassicEditor
     let ckeditor

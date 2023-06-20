@@ -9,6 +9,7 @@ export function load({ cookies, locals }) {
     const settings = locals.settings
     settings.pageTitle = 'ទំព័រ​ការផ្សាយ'
     settings.type = 'post'
+    settings.pageNumber = 0
     const db = locals.db
 
     try {

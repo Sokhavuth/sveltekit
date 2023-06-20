@@ -4,7 +4,6 @@
     import { items } from '$lib/store.js'
     import { afterUpdate } from 'svelte'
     export let data
-    let page = 0
 
     afterUpdate(()=>{
         const element = document.querySelector(".load-more img")
@@ -17,7 +16,7 @@
         const response = await fetch(`/admin/${type}/paginate`, {
             method: 'POST',
 			body: JSON.stringify({
-                page: ++page
+                page: ++$items.pageNumber
 			})
         })
 

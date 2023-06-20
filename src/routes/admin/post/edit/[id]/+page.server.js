@@ -9,6 +9,7 @@ export async function load({ cookies, locals, params }) {
     const settings = locals.settings
     settings.pageTitle = 'ទំព័រ​កែប្រែ​ការផ្សាយ'
     settings.type = 'post'
+    settings.pageNumber = 0
     const db = locals.db
 
     try {
