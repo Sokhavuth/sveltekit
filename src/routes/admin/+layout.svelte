@@ -2,17 +2,12 @@
 
 <script>
     import { items } from '$lib/store.js'
-    import { afterUpdate } from 'svelte'
+    import { tick } from 'svelte'
     export let data
-
-    afterUpdate(()=>{
-        const element = document.querySelector(".load-more img")
-        element.setAttribute("src", "/images/load-more.png")
-    })
+    let src = "/images/load-more.png"
 
     async function loadMoreData(type){
-        const element = document.querySelector(".load-more img")
-        element.setAttribute("src", "/images/loading.gif")
+        src = "/images/loading.gif"
         const response = await fetch(`/admin/${type}/paginate`, {
             method: 'POST',
 			body: JSON.stringify({
@@ -23,6 +18,8 @@
         const result = await response.json()
         const moreItems = result.posts
         $items.items = [...$items.items, ...moreItems]
+        await tick()
+        src = "/images/load-more.png"
     }
 </script>
 
@@ -95,7 +92,7 @@
         {/each}
     </ul>
     <div class='load-more'>
-        <img on:click={()=>loadMoreData($items.type)} src='/images/load-more.png' />
+        <img on:click={()=>loadMoreData($items.type)} {src} />
     </div>
 </footer>
 
