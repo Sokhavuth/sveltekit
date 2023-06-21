@@ -4,27 +4,20 @@ import { SECRET_KEY } from '$env/static/private'
 import jwt from 'jsonwebtoken'
 import { redirect, error } from '@sveltejs/kit'
 
-export async function load({ cookies, locals, params }) {
-    const token = cookies.get('token')
+export async function load({ locals, params }) {
     const settings = locals.settings
     settings.pageTitle = 'ទំព័រ​កែប្រែ​ការផ្សាយ'
     settings.type = 'post'
     settings.pageNumber = 0
     const db = locals.db
 
-    try {
-        var user = jwt.verify(token, SECRET_KEY)
-    } catch(err) {
-        console.log(err.message)
-        throw redirect(307, '/login')
-    }
-
     const count = await db.collection('posts').countDocuments()
     const amount = settings.dItemLimit
     const items = await db.collection("posts").find({}, {projection: {_id: 0}}).sort({date:-1,_id:-1}).limit(amount).toArray()
     const item = await db.collection("posts").findOne({id: params.id}, {projection: {_id: 0}})
+    const categories = await db.collection("categories").find({}, {projection: {_id: 0}}).toArray()
 
-    return { settings, count, items, item }
+    return { settings, count, items, item, categories }
 }
 
 export const actions = {

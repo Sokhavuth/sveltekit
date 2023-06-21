@@ -1,7 +1,9 @@
 // src/routes/admin/upload/+page.server.js
 
 import { writeFile } from 'fs/promises'
-import { fail } from '@sveltejs/kit'
+import { SECRET_KEY } from '$env/static/private'
+import jwt from 'jsonwebtoken'
+import { redirect, fail } from '@sveltejs/kit'
 
 export const actions = {
     default: async ({ request, route, url }) => {
@@ -15,6 +17,6 @@ export const actions = {
         const fileName = `${crypto.randomUUID()}-${file.name}`
         await writeFile(`./static/upload/${fileName}`, new Uint8Array(await file.arrayBuffer()))
 
-        return { fileName: `upload/${fileName}` }
+        return { fileName: `/upload/${fileName}` }
     }
 }

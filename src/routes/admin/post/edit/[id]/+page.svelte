@@ -199,9 +199,9 @@
     <div class='wrapper'>
         <select name='category' bind:value={selected} on:change={addCategory} >
             <option disabled selected>ជ្រើសរើស​ជំពូក</option>
-            <option>មេរៀន</option>
-            <option>ព័ត៌មាន</option>
-            <option>ភាពយន្ត</option>
+            {#each data.categories as category (category.id)}
+                <option>{category.title}</option>
+            {/each}
         </select>
         <input type='text' name='thumb' value="{data.item.thumb}" required placeholder="តំណរ​ភ្ជាប់​រូប​តំណាង" />
         <input type='datetime-local' step='1' value="{data.item.datetime}" name='datetime' required />

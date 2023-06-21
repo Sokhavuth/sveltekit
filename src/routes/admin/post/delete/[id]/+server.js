@@ -2,7 +2,7 @@
 
 import { SECRET_KEY } from '$env/static/private'
 import jwt from 'jsonwebtoken'
-import { redirect, error } from '@sveltejs/kit'
+import { redirect } from '@sveltejs/kit'
 
 export async function GET({ cookies, locals, params }){
     const token = cookies.get('token')

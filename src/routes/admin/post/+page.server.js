@@ -22,8 +22,9 @@ export async function load({ cookies, locals }) {
     const count = await db.collection('posts').countDocuments()
     const amount = settings.dItemLimit
     const items = await db.collection("posts").find({}, {projection: {_id: 0}}).sort({date:-1,_id:-1}).limit(amount).toArray()
+    const categories = await db.collection("categories").find({}, {projection: {_id: 0}}).toArray()
 
-    return { settings, count, items }
+    return { settings, count, items, categories }
 }
 
 export const actions = {
