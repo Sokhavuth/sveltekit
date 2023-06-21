@@ -2,7 +2,7 @@
 
 import { SECRET_KEY } from '$env/static/private'
 import jwt from 'jsonwebtoken'
-import { redirect, error } from '@sveltejs/kit'
+import { redirect } from '@sveltejs/kit'
 import { json } from '@sveltejs/kit'
 
 export async function POST({request,locals, cookies}){
@@ -20,7 +20,7 @@ export async function POST({request,locals, cookies}){
         const settings = locals.settings
         const amount = settings.dItemLimit
         
-        const items = await db.collection("posts").find().sort({datetime:-1,_id:-1}).skip(amount*page).limit(amount).toArray()
+        const items = await db.collection("categories").find().sort({datetime:-1,_id:-1}).skip(amount*page).limit(amount).toArray()
 
     return json({items})
 }

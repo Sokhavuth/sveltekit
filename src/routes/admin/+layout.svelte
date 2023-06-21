@@ -16,7 +16,7 @@
         })
 
         const result = await response.json()
-        const moreItems = result.posts
+        const moreItems = result.items
         $items.items = [...$items.items, ...moreItems]
         await tick()
         src = "/images/load-more.png"
@@ -71,7 +71,7 @@
             <li>
                 <a class="thumb" href="/{$items.type}/{item.id}">
                     <img src='{item.thumb}' />
-                    {#if (item.videos !== "" && item.videos !== "[]")}
+                    {#if (item?.videos && item.videos !== "" && item.videos !== "[]")}
                     <img class="play-icon" src='/images/play.png' />
                     {/if}
                 </a>

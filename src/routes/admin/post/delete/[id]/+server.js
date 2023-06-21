@@ -1,4 +1,4 @@
-// src/routes/admin/delete/[id]/server.js
+// src/routes/admin/post/delete/[id]/server.js
 
 import { SECRET_KEY } from '$env/static/private'
 import jwt from 'jsonwebtoken'
