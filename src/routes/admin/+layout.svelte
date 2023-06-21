@@ -7,6 +7,7 @@
     let src = "/images/load-more.png"
 
     async function loadMoreData(type){
+        if(!type){return}
         src = "/images/loading.gif"
         const response = await fetch(`/admin/${type}/paginate`, {
             method: 'POST',
