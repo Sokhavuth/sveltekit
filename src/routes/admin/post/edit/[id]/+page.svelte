@@ -8,7 +8,6 @@
     $: $items.pageTitle = data.settings.pageTitle
     $: $items.count = data.count
     $: $items.items = data.items
-    $: $items.item = data.item
     $: $items.type = data.settings.type
     $: $items.pageNumber = data.settings.pageNumber
 
@@ -64,7 +63,7 @@
     afterUpdate(()=>{
         parseVideos()
         if(ckeditor){
-            ckeditor.setData($items.item.content)
+            ckeditor.setData(data.item.content)
         }
     })
 
@@ -194,9 +193,9 @@
 </script>
 
 <form method='post' on:submit|preventDefault={submitform}>
-    <input type='text' name='title' value="{$items.item.title}" placeholder="ចំណងជើង" required />
-    <textarea name='content' value="{$items.item.content}" id='editor'></textarea>
-    <input type='text' name='categories' value="{$items.item.categories.join(", ")}" class='categories' placeholder="បណ្តា​ជំពូក" required />
+    <input type='text' name='title' value="{data.item.title}" placeholder="ចំណងជើង" required />
+    <textarea name='content' value="{data.item.content}" id='editor'></textarea>
+    <input type='text' name='categories' value="{data.item.categories.join(", ")}" class='categories' placeholder="បណ្តា​ជំពូក" required />
     <div class='wrapper'>
         <select name='category' bind:value={selected} on:change={addCategory} >
             <option disabled selected>ជ្រើសរើស​ជំពូក</option>
@@ -204,11 +203,11 @@
             <option>ព័ត៌មាន</option>
             <option>ភាពយន្ត</option>
         </select>
-        <input type='text' name='thumb' value="{$items.item.thumb}" required placeholder="តំណរ​ភ្ជាប់​រូប​តំណាង" />
-        <input type='datetime-local' step='1' value="{$items.item.datetime}" name='datetime' required />
-        <input type='submit' value='ចុះ​ផ្សាយ' />
+        <input type='text' name='thumb' value="{data.item.thumb}" required placeholder="តំណរ​ភ្ជាប់​រូប​តំណាង" />
+        <input type='datetime-local' step='1' value="{data.item.datetime}" name='datetime' required />
+        <input type='submit' value='កែប្រែ' />
     </div>
-    <input name='videos' value="{$items.item.videos}" type='hidden' />
+    <input name='videos' value="{data.item.videos}" type='hidden' />
 </form>
 
 <div class='form'>

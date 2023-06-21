@@ -16,7 +16,7 @@
         <span>ឈ្មោះជំពូកៈ</span><input type="text" name="title" required />
         <span>រូប​សញ្ញាៈ</span><input type="text" name="thumb" required />
         <span>ពេល​បង្កើតៈ</span><input type="datetime-local" name="datetime" step="1" required />
-        <span></span><input type="submit" value="បញ្ជូន" />
+        <span></span><input type="submit" value="បង្កើត" />
     </form>
 </section>
 

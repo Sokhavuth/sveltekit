@@ -7,7 +7,6 @@
     $: $items.pageTitle = data.settings.pageTitle
     $: $items.count = data.count
     $: $items.items = data.items
-    $: $items.item = data.item
     $: $items.type = data.settings.type
     $: $items.pageNumber = data.settings.pageNumber
 </script>
@@ -17,7 +16,7 @@
         <span>ឈ្មោះជំពូកៈ</span><input type="text" value="{data.item.title}" name="title" required />
         <span>រូប​សញ្ញាៈ</span><input type="text" value="{data.item.thumb}" name="thumb" required />
         <span>ពេល​បង្កើតៈ</span><input type="datetime-local" value="{data.item.datetime}" name="datetime" step="1" required />
-        <span></span><input type="submit" value="បញ្ជូន" />
+        <span></span><input type="submit" value="កែប្រែ" />
     </form>
 </section>
 
